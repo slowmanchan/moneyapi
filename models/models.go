@@ -6,7 +6,9 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type RawBankStatment struct {
+// RawBankStatement is a struct representing a
+// db object of the same name
+type RawBankStatement struct {
 	ID              int       `json:"id" db:"id"`
 	Posted          time.Time `json:"posted" db:"posted"`
 	TransactionDesc string    `json:"transaction_desc" db:"transaction_desc"`
@@ -17,16 +19,17 @@ type RawBankStatment struct {
 	Provider        string    `json:"provider" db:"provider"`
 }
 
-func AllRawBankStatements(db *sqlx.DB) ([]RawBankStatment, error) {
+// AllRawBankStatements pull all rawbankstatements from the db
+func AllRawBankStatements(db *sqlx.DB) ([]RawBankStatement, error) {
 	rows, err := db.Queryx("SELECT * FROM raw_bank_statements")
 	if err != nil {
 		return nil, err
 	}
-	var rawStatements []RawBankStatment
+	var rawStatements []RawBankStatement
 	defer rows.Close()
 
 	for rows.Next() {
-		var rawStatement RawBankStatment
+		var rawStatement RawBankStatement
 		if err := rows.StructScan(&rawStatement); err != nil {
 			return nil, err
 		}
