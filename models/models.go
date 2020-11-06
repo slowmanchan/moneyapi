@@ -4,6 +4,8 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	// postgres db driver
+	_ "github.com/lib/pq"
 )
 
 // RawBankStatement is a struct representing a
