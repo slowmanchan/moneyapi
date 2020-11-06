@@ -1,0 +1,9 @@
+# Ignore .env config file
+.env
+
+# Raw CSV/JSON/NDJSON data
+/data
+
+# Ignore VS Code configs & debug
+/.vscode
+/debug
